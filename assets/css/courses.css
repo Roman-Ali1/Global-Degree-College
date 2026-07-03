@@ -1,0 +1,332 @@
+/*
+ * Global Degree College – Courses Page Styles
+ * Save to: assets/css/courses.css
+ */
+
+/* ── Filter Tabs ─────────────────────────────────────────────── */
+.course-filter-tabs {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.filter-tab {
+  padding: 7px 18px;
+  border: 1.5px solid var(--border-color);
+  background: var(--fvc-white);
+  border-radius: 30px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.filter-tab:hover {
+  border-color: var(--fvc-navy);
+  color: var(--fvc-navy);
+}
+
+.filter-tab.active {
+  background: var(--fvc-navy);
+  border-color: var(--fvc-navy);
+  color: var(--fvc-white);
+}
+
+/* ── Course Detail Cards ─────────────────────────────────────── */
+.course-detail-card {
+  background: var(--fvc-white);
+  border-radius: var(--radius-lg);
+  padding: 28px;
+  border: 1.5px solid var(--border-color);
+  box-shadow: var(--shadow-sm);
+  height: 100%;
+  transition: var(--transition);
+  display: flex;
+  flex-direction: column;
+}
+
+.course-detail-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-lg);
+  border-color: rgba(201, 168, 76, 0.4);
+}
+
+.course-card-active {
+  border-color: var(--fvc-gold) !important;
+  box-shadow:
+    0 0 0 3px rgba(201, 168, 76, 0.2),
+    var(--shadow-md) !important;
+}
+
+/* Card header row */
+.course-card-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 16px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.course-card-icon {
+  width: 52px;
+  height: 52px;
+  flex-shrink: 0;
+  background: linear-gradient(135deg, var(--fvc-navy), var(--fvc-navy-dark));
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--fvc-gold-light);
+  font-size: 1.3rem;
+}
+
+.course-badge {
+  display: inline-block;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--fvc-gold);
+  background: rgba(201, 168, 76, 0.1);
+  border: 1px solid rgba(201, 168, 76, 0.25);
+  padding: 2px 10px;
+  border-radius: 20px;
+  margin-bottom: 4px;
+  display: block;
+}
+
+.course-card-header h4 {
+  font-size: 1.05rem;
+  margin: 0;
+  line-height: 1.3;
+}
+
+.course-description {
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+  line-height: 1.65;
+  margin-bottom: 18px;
+  flex-grow: 1;
+}
+
+/* Details 2x2 grid */
+.course-details-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.course-detail-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  background: var(--fvc-off-white);
+  padding: 10px 12px;
+  border-radius: var(--radius-sm);
+}
+
+.course-detail-item i {
+  color: var(--fvc-gold);
+  font-size: 0.9rem;
+  margin-top: 2px;
+  flex-shrink: 0;
+}
+
+.detail-label {
+  display: block;
+  font-size: 0.68rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+  margin-bottom: 1px;
+}
+
+.detail-value {
+  display: block;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+/* Eligibility row */
+.course-eligibility {
+  background: rgba(201, 168, 76, 0.06);
+  border: 1px solid rgba(201, 168, 76, 0.2);
+  border-radius: var(--radius-sm);
+  padding: 10px 14px;
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+/* ── Comparison Table ─────────────────────────────────────────── */
+.fvc-table {
+  border-collapse: separate;
+  border-spacing: 0;
+  width: 100%;
+  font-size: 0.9rem;
+}
+
+.fvc-table thead tr.table-heading-row {
+  background: var(--fvc-navy);
+}
+
+.fvc-table thead tr.table-heading-row th {
+  padding: 14px 18px;
+  font-weight: 700;
+  font-size: 0.92rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border: none;
+  color: #ffffff;
+  background: var(--fvc-navy);
+  vertical-align: bottom;
+}
+
+.fvc-table thead th {
+  padding: 14px 18px;
+  font-weight: 700;
+  font-size: 0.92rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border: none;
+  color: var(--fvc-white);
+  vertical-align: bottom;
+}
+
+.fvc-table thead th:first-child {
+  border-radius: var(--radius-sm) 0 0 0;
+}
+.fvc-table thead th:last-child {
+  border-radius: 0 var(--radius-sm) 0 0;
+}
+
+.fvc-table tbody tr {
+  transition: var(--transition);
+}
+
+.fvc-table tbody tr:hover {
+  background: rgba(201, 168, 76, 0.06);
+}
+
+.fvc-table tbody td {
+  padding: 14px 18px;
+  border-bottom: 1px solid var(--border-color);
+  vertical-align: middle;
+  color: var(--text-primary);
+}
+
+.badge-code {
+  background: var(--fvc-navy);
+  color: var(--fvc-gold-light);
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 4px;
+  letter-spacing: 0.05em;
+}
+
+/* ── Career Pathways ──────────────────────────────────────────── */
+.pathway-card {
+  background: var(--fvc-white);
+  border-radius: var(--radius-md);
+  padding: 26px;
+  border: 1.5px solid var(--border-color);
+  box-shadow: var(--shadow-sm);
+  height: 100%;
+  transition: var(--transition);
+}
+
+.pathway-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+  border-color: rgba(201, 168, 76, 0.3);
+}
+
+.pathway-icon {
+  width: 50px;
+  height: 50px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  color: var(--fvc-white);
+  margin-bottom: 14px;
+}
+
+.pathway-icon.bg-red {
+  background: linear-gradient(135deg, #e53e3e, #c53030);
+}
+.pathway-icon.bg-blue {
+  background: linear-gradient(135deg, #3182ce, #2b6cb0);
+}
+.pathway-icon.bg-green {
+  background: linear-gradient(135deg, #38a169, #276749);
+}
+.pathway-icon.bg-purple {
+  background: linear-gradient(135deg, #805ad5, #6b46c1);
+}
+.pathway-icon.bg-gold {
+  background: linear-gradient(135deg, var(--fvc-gold), #a8872e);
+}
+
+.pathway-card h6 {
+  font-size: 1rem;
+  margin-bottom: 8px;
+  color: var(--text-primary);
+}
+
+.pathway-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.pathway-list li {
+  font-size: 0.83rem;
+  color: var(--text-secondary);
+  padding: 4px 0;
+  border-bottom: 1px dashed var(--border-color);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.pathway-list li:last-child {
+  border-bottom: none;
+}
+
+.pathway-list li::before {
+  content: "›";
+  color: var(--fvc-gold);
+  font-size: 1rem;
+  line-height: 1;
+}
+
+/* ── Hidden filter items ─────────────────────────────────────── */
+.course-grid-item.hidden {
+  display: none;
+}
+
+/* ── Responsive ──────────────────────────────────────────────── */
+@media (max-width: 767px) {
+  .course-filter-tabs {
+    justify-content: flex-start;
+  }
+  .course-details-grid {
+    grid-template-columns: 1fr;
+  }
+  .fvc-table {
+    font-size: 0.8rem;
+  }
+  .fvc-table thead th,
+  .fvc-table tbody td {
+    padding: 10px 12px;
+  }
+}

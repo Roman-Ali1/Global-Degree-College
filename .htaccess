@@ -1,0 +1,82 @@
+# Future Vision College – Apache Configuration
+# Save to: .htaccess (project root)
+
+Options -Indexes
+Options -MultiViews
+
+# ── URL Rewriting ─────────────────────────────────────────────
+RewriteEngine On
+RewriteBase /Global-Degree-College/
+# Redirect to HTTPS in production (uncomment when SSL is active)
+# RewriteCond %{HTTPS} off
+# RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# Remove trailing slash (except root)
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)/$ /$1 [L,R=301]
+
+# ── Block direct access to sensitive directories ──────────────
+RewriteRule ^includes/       - [F,L]
+RewriteRule ^sql/            - [F,L]
+RewriteRule ^uploads/admissions/ - [F,L]
+
+# ── Security Headers ──────────────────────────────────────────
+<IfModule mod_headers.c>
+    Header always set X-Frame-Options          "SAMEORIGIN"
+    Header always set X-Content-Type-Options   "nosniff"
+    Header always set X-XSS-Protection         "1; mode=block"
+    Header always set Referrer-Policy          "strict-origin-when-cross-origin"
+    Header always set Permissions-Policy       "geolocation=(), microphone=(), camera=()"
+
+    # Remove server signature
+    Header unset X-Powered-By
+    Header always unset X-Powered-By
+</IfModule>
+
+# ── Disable server signature ──────────────────────────────────
+ServerSignature Off
+
+# ── Protect sensitive files ───────────────────────────────────
+<FilesMatch "(\.env|\.git|composer\.json|composer\.lock|package\.json)$">
+    Require all denied
+</FilesMatch>
+
+# Protect .htaccess itself
+<Files ".htaccess">
+    Require all denied
+</Files>
+
+# ── PHP settings ──────────────────────────────────────────────
+<IfModule mod_php.c>
+    php_flag display_errors    Off
+    php_value upload_max_filesize 10M
+    php_value post_max_size       12M
+    php_value max_execution_time  60
+    php_value session.cookie_httponly 1
+    php_flag session.use_strict_mode  On
+</IfModule>
+
+# ── Cache static assets ───────────────────────────────────────
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresByType image/jpg     "access plus 1 month"
+    ExpiresByType image/jpeg    "access plus 1 month"
+    ExpiresByType image/png     "access plus 1 month"
+    ExpiresByType image/webp    "access plus 1 month"
+    ExpiresByType text/css      "access plus 1 week"
+    ExpiresByType application/javascript "access plus 1 week"
+    ExpiresByType image/x-icon  "access plus 1 year"
+</IfModule>
+
+# ── Gzip compression ──────────────────────────────────────────
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html text/plain text/css
+    AddOutputFilterByType DEFLATE application/javascript application/json
+</IfModule>
+
+# ── Block bad bots ────────────────────────────────────────────
+<IfModule mod_rewrite.c>
+    RewriteCond %{HTTP_USER_AGENT} (libwww-perl|wget|python|nikto|curl|scan|java|winhttp|clshttp|loader) [NC,OR]
+    RewriteCond %{HTTP_USER_AGENT} (<|>|'|%0A|%0D|%27|%3C|%3E|%00) [NC]
+    RewriteRule .* - [F,L]
+</IfModule>

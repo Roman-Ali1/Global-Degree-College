@@ -1,0 +1,195 @@
+/*
+ * Global Degree College – Gallery Page Styles
+ * Save to: assets/css/gallery.css
+ */
+
+/* ── Filter Tabs ─────────────────────────────────────────────── */
+.gallery-filter-wrap {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.gallery-filter-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 20px;
+  border: 1.5px solid var(--border-color);
+  border-radius: 30px;
+  background: var(--fvc-white);
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+  box-shadow: 0 6px 16px rgba(26, 60, 110, 0.08);
+  min-height: 42px;
+}
+
+.gallery-filter-btn:hover {
+  border-color: var(--fvc-navy);
+  color: var(--fvc-navy);
+}
+
+.gallery-filter-btn.active {
+  background: var(--fvc-navy);
+  border-color: var(--fvc-navy);
+  color: var(--fvc-white);
+}
+
+.filter-count {
+  background: rgba(255, 255, 255, 0.2);
+  font-size: 0.72rem;
+  padding: 1px 7px;
+  border-radius: 20px;
+  font-weight: 700;
+}
+
+.gallery-filter-btn:not(.active) .filter-count {
+  background: var(--fvc-light-bg);
+  color: var(--text-muted);
+}
+
+/* ── Masonry Grid ─────────────────────────────────────────────── */
+.masonry-grid {
+  columns: 4;
+  column-gap: 16px;
+}
+
+.masonry-item {
+  break-inside: avoid;
+  margin-bottom: 16px;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  position: relative;
+  display: block;
+  background: var(--fvc-light-bg);
+  transition: var(--transition);
+}
+
+.masonry-item.hidden {
+  display: none;
+}
+
+.masonry-item a {
+  display: block;
+  position: relative;
+}
+
+.masonry-item img {
+  width: 100%;
+  height: auto;
+  display: block;
+  transition: transform 0.4s ease;
+}
+
+.masonry-item:hover img {
+  transform: scale(1.04);
+}
+
+/* ── Hover Overlay ────────────────────────────────────────────── */
+.masonry-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(15, 37, 72, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: var(--transition);
+  backdrop-filter: blur(2px);
+}
+
+.masonry-item:hover .masonry-overlay {
+  opacity: 1;
+}
+
+.masonry-overlay-inner {
+  text-align: center;
+  color: var(--fvc-white);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 16px;
+}
+
+.masonry-overlay-inner i {
+  font-size: 1.8rem;
+  color: var(--fvc-gold-light);
+}
+
+.masonry-overlay-inner span {
+  font-size: 0.82rem;
+  font-weight: 500;
+  line-height: 1.4;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+}
+
+/* ── Category tag on image ────────────────────────────────────── */
+.masonry-category-tag {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: rgba(201, 168, 76, 0.9);
+  color: var(--fvc-navy-dark);
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 3px 10px;
+  border-radius: 20px;
+  pointer-events: none;
+  opacity: 0;
+  transition: var(--transition);
+}
+
+.masonry-item:hover .masonry-category-tag {
+  opacity: 1;
+}
+
+/* ── Lightbox overrides (lightbox2 theme) ─────────────────────── */
+.lb-data .lb-caption {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #fff;
+}
+
+.lb-nav a.lb-prev,
+.lb-nav a.lb-next {
+  opacity: 0.8;
+}
+
+.lb-closeContainer .lb-close {
+  opacity: 0.8;
+}
+
+/* ── Responsive columns ───────────────────────────────────────── */
+@media (max-width: 1199px) {
+  .masonry-grid {
+    columns: 3;
+  }
+}
+
+@media (max-width: 767px) {
+  .masonry-grid {
+    columns: 2;
+    column-gap: 10px;
+  }
+  .masonry-item {
+    margin-bottom: 10px;
+  }
+  .gallery-filter-btn {
+    font-size: 0.78rem;
+    padding: 6px 14px;
+  }
+}
+
+@media (max-width: 400px) {
+  .masonry-grid {
+    columns: 1;
+  }
+}

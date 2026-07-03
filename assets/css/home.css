@@ -1,0 +1,343 @@
+/*
+ * Future Vision College – Home Page Styles
+ * Save to: assets/css/home.css
+ * Loaded AFTER style.css on index.php only
+ */
+
+/* ── Hero Slider ─────────────────────────────────────────────── */
+.hero-slider { position: relative; }
+
+.hero-slide {
+    min-height: 620px;
+    display: flex;
+    align-items: center;
+    position: relative;
+    background-size: cover;
+    background-position: center;
+}
+
+.hero-slide-1 { background-image: linear-gradient(135deg, rgba(15,37,72,0.85), rgba(15,37,72,0.65)), url('../images/hero/slider-1.jpg'); background-color: var(--fvc-navy-dark); }
+.hero-slide-2 { background-image: linear-gradient(135deg, rgba(15,37,72,0.85), rgba(15,37,72,0.65)), url('../images/hero/slider-2.jpg'); background-color: var(--fvc-navy-dark); }
+.hero-slide-3 { background-image: linear-gradient(135deg, rgba(15,37,72,0.85), rgba(15,37,72,0.65)), url('../images/hero/slider-3.jpg'); background-color: var(--fvc-navy-dark); }
+
+.hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at top right, rgba(201,168,76,0.15), transparent 60%);
+}
+
+.hero-content { position: relative; z-index: 2; padding: 40px 0; }
+
+.hero-badge {
+    display: inline-block;
+    background: rgba(201,168,76,0.18);
+    border: 1px solid rgba(201,168,76,0.4);
+    color: var(--fvc-gold-light);
+    padding: 7px 18px;
+    border-radius: 30px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+.hero-title {
+    color: var(--fvc-white);
+    font-size: clamp(2rem, 4.5vw, 3.4rem);
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 18px;
+}
+
+.hero-subtitle {
+    color: rgba(255,255,255,0.8);
+    font-size: 1.1rem;
+    max-width: 560px;
+    line-height: 1.7;
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+    width: 60px;
+    opacity: 1;
+}
+
+.hero-nav-icon {
+    width: 44px;
+    height: 44px;
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.25);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--fvc-white);
+    transition: var(--transition);
+    backdrop-filter: blur(4px);
+}
+
+.hero-nav-icon:hover { background: var(--fvc-gold); color: var(--fvc-navy-dark); }
+
+.carousel-indicators [data-bs-target] {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.4);
+    border: none;
+}
+
+.carousel-indicators .active { background: var(--fvc-gold); }
+
+/* ── Welcome Section ─────────────────────────────────────────── */
+.welcome-image-wrap { position: relative; }
+
+.welcome-img {
+    width: 100%;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    aspect-ratio: 4/3.2;
+    object-fit: cover;
+}
+
+.welcome-badge {
+    position: absolute;
+    bottom: -24px;
+    right: -10px;
+    background: var(--fvc-white);
+    padding: 16px 22px;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-lg);
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    border-left: 4px solid var(--fvc-gold);
+}
+
+.welcome-badge i { font-size: 1.8rem; color: var(--fvc-gold); }
+.welcome-badge strong { display: block; font-size: 1.3rem; color: var(--fvc-navy); line-height: 1.1; }
+.welcome-badge span { font-size: 0.75rem; color: var(--text-muted); }
+
+.eyebrow-tag {
+    display: inline-block;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--fvc-gold);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 10px;
+}
+
+.welcome-feature {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+/* ── Course Cards ─────────────────────────────────────────────── */
+.course-icon {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, var(--fvc-navy), var(--fvc-navy-dark));
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--fvc-gold-light);
+    font-size: 1.5rem;
+}
+
+.course-meta-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-size: 0.82rem;
+    color: var(--text-secondary);
+}
+
+.course-meta-list li {
+    padding: 5px 0;
+    border-bottom: 1px dashed var(--border-color);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.course-meta-list li:last-child { border-bottom: none; }
+
+/* ── Why Choose Us ────────────────────────────────────────────── */
+.why-card {
+    background: var(--fvc-white);
+    padding: 32px 22px;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+    transition: var(--transition);
+    height: 100%;
+}
+
+.why-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-md);
+}
+
+.why-icon {
+    width: 64px;
+    height: 64px;
+    margin: 0 auto 16px;
+    background: rgba(201,168,76,0.1);
+    border: 1.5px solid rgba(201,168,76,0.25);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.6rem;
+    color: var(--fvc-gold);
+}
+
+/* ── Faculty Cards ────────────────────────────────────────────── */
+.faculty-photo-wrap {
+    width: 130px;
+    height: 130px;
+    margin: 0 auto;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 4px solid var(--fvc-off-white);
+    box-shadow: var(--shadow-md);
+}
+
+.faculty-photo { width: 100%; height: 100%; object-fit: cover; }
+
+/* ── News Cards ───────────────────────────────────────────────── */
+.news-img-wrap { position: relative; height: 180px; overflow: hidden; }
+.news-img-wrap img { width: 100%; height: 100%; object-fit: cover; transition: var(--transition); }
+.news-card:hover .news-img-wrap img { transform: scale(1.06); }
+
+.news-category {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    background: var(--fvc-gold);
+    color: var(--fvc-navy-dark);
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 4px 12px;
+    border-radius: 20px;
+    text-transform: uppercase;
+}
+
+/* ── Events sidebar mini items ────────────────────────────────── */
+.event-mini-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.event-mini-item:last-of-type { border-bottom: none; }
+
+.event-date-box {
+    width: 52px;
+    height: 52px;
+    background: var(--fvc-light-bg);
+    border-radius: var(--radius-sm);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    border: 1px solid var(--border-color);
+}
+
+.event-day { font-weight: 700; font-size: 1.1rem; color: var(--fvc-navy); line-height: 1; }
+.event-month { font-size: 0.7rem; text-transform: uppercase; color: var(--text-muted); }
+
+/* ── Testimonials ─────────────────────────────────────────────── */
+.testimonial-card {
+    background: var(--fvc-white);
+    border-radius: var(--radius-md);
+    padding: 28px;
+    box-shadow: var(--shadow-sm);
+    height: 100%;
+    border-top: 3px solid var(--fvc-gold);
+}
+
+.testimonial-rating i { font-size: 0.8rem; margin-right: 2px; }
+
+.testimonial-text {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    font-style: italic;
+    line-height: 1.7;
+    margin: 14px 0 0;
+}
+
+.testimonial-avatar {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.carousel-controls-custom { display: flex; justify-content: center; gap: 12px; }
+
+.carousel-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1.5px solid var(--fvc-navy);
+    background: transparent;
+    color: var(--fvc-navy);
+    transition: var(--transition);
+}
+
+.carousel-btn:hover { background: var(--fvc-navy); color: var(--fvc-white); }
+
+/* ── Gallery Preview ──────────────────────────────────────────── */
+.gallery-preview-item {
+    position: relative;
+    display: block;
+    aspect-ratio: 1/1;
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+}
+
+.gallery-preview-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: var(--transition);
+}
+
+.gallery-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(15,37,72,0.65);
+    color: var(--fvc-gold-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+    opacity: 0;
+    transition: var(--transition);
+}
+
+.gallery-preview-item:hover .gallery-overlay { opacity: 1; }
+.gallery-preview-item:hover img { transform: scale(1.1); }
+
+/* ── Contact CTA Section ──────────────────────────────────────── */
+.contact-cta-section {
+    background: linear-gradient(135deg, var(--fvc-navy) 0%, var(--fvc-navy-dark) 100%);
+    padding: 50px 0;
+}
+
+/* ── Responsive ──────────────────────────────────────────────── */
+@media (max-width: 991px) {
+    .hero-slide { min-height: 480px; }
+    .welcome-badge { position: static; margin-top: -30px; margin-left: 16px; max-width: fit-content; }
+}
+
+@media (max-width: 575px) {
+    .hero-slide { min-height: 420px; }
+    .hero-subtitle { font-size: 0.95rem; }
+}

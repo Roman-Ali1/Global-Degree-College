@@ -1,0 +1,201 @@
+/*
+ * Global Degree College – About Page Styles
+ * Save to: assets/css/about.css
+ */
+
+/* ── History Image Grid ──────────────────────────────────────── */
+.history-image-grid {
+    position: relative;
+}
+
+.history-img-main {
+    width: 100%;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    aspect-ratio: 4/3;
+    object-fit: cover;
+}
+
+.history-img-sub {
+    position: absolute;
+    bottom: -30px;
+    left: -30px;
+    width: 45%;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-lg);
+    border: 5px solid var(--fvc-white);
+    aspect-ratio: 1/1;
+    object-fit: cover;
+}
+
+/* ── Mission / Vision Cards ──────────────────────────────────── */
+.mv-card {
+    background: var(--fvc-white);
+    border-radius: var(--radius-lg);
+    padding: 40px 32px;
+    box-shadow: var(--shadow-sm);
+    border-top: 4px solid var(--fvc-gold);
+    transition: var(--transition);
+}
+
+.mv-card:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-4px);
+}
+
+.mv-icon {
+    width: 64px;
+    height: 64px;
+    background: linear-gradient(135deg, var(--fvc-navy), var(--fvc-navy-dark));
+    color: var(--fvc-gold-light);
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.6rem;
+    margin-bottom: 20px;
+}
+
+.mv-card h3 {
+    font-size: 1.4rem;
+    margin-bottom: 14px;
+}
+
+/* ── Leadership Cards ─────────────────────────────────────────── */
+.leader-card {
+    background: var(--fvc-white);
+    border-radius: var(--radius-lg);
+    padding: 36px;
+    box-shadow: var(--shadow-sm);
+    height: 100%;
+    position: relative;
+}
+
+.leader-quote-icon {
+    color: rgba(201,168,76,0.25);
+    font-size: 2rem;
+    margin-bottom: 12px;
+}
+
+.leader-message {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    line-height: 1.8;
+    font-style: italic;
+    margin-bottom: 24px;
+}
+
+.leader-profile {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border-color);
+}
+
+.leader-photo {
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid var(--fvc-off-white);
+    box-shadow: var(--shadow-md);
+    flex-shrink: 0;
+}
+
+/* ── Core Values Cards ───────────────────────────────────────── */
+.value-card {
+    background: var(--fvc-white);
+    padding: 30px 20px;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+    height: 100%;
+    transition: var(--transition);
+}
+
+.value-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-md);
+}
+
+.value-icon {
+    width: 60px;
+    height: 60px;
+    margin: 0 auto 16px;
+    background: rgba(201,168,76,0.1);
+    border: 1.5px solid rgba(201,168,76,0.25);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    color: var(--fvc-gold);
+}
+
+/* ── Timeline ─────────────────────────────────────────────────── */
+.timeline {
+    position: relative;
+    max-width: 800px;
+    margin: 0 auto;
+    padding-left: 30px;
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 8px;
+    bottom: 8px;
+    width: 2px;
+    background: linear-gradient(180deg, var(--fvc-gold), var(--fvc-navy));
+}
+
+.timeline-item {
+    position: relative;
+    padding-left: 36px;
+    padding-bottom: 36px;
+}
+
+.timeline-item:last-child { padding-bottom: 0; }
+
+.timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -6px;
+    top: 4px;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--fvc-gold);
+    border: 3px solid var(--fvc-white);
+    box-shadow: 0 0 0 2px var(--fvc-gold);
+}
+
+.timeline-year {
+    display: inline-block;
+    background: var(--fvc-navy);
+    color: var(--fvc-gold-light);
+    font-weight: 700;
+    font-size: 0.85rem;
+    padding: 4px 16px;
+    border-radius: 20px;
+    margin-bottom: 10px;
+}
+
+.timeline-content h6 {
+    font-size: 1.05rem;
+    margin-bottom: 8px;
+}
+
+/* ── Responsive ──────────────────────────────────────────────── */
+@media (max-width: 767px) {
+    .history-img-sub {
+        position: static;
+        width: 100%;
+        margin-top: 16px;
+        aspect-ratio: 16/9;
+    }
+
+    .timeline { padding-left: 20px; }
+    .timeline-item { padding-left: 28px; }
+}
