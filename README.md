@@ -288,4 +288,4 @@ Prevents accidental data loss on critical records (applications, students). Hard
 
 ## License
 
-This project was built for **Global Degree College, Peshawar** as a real-world college management system. Not licensed for redistribution.
+This project was built for **Global Degree College, Peshawar** as a real-world college management system. Not licensed for redistribution. 
