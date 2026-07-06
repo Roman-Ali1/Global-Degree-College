@@ -1,0 +1,1 @@
+<?php echo password_hash('YourNewPassword@123', PASSWORD_BCRYPT, ['cost' => 12]);   

@@ -19,6 +19,8 @@ if (isPost()) {
             $uploaded = $uploader->upload($_FILES[$key], $key . '_');
             $value    = $uploaded ? 'assets/images/logo/' . $uploaded : null;
             if (!$value) continue;
+        } elseif ($key === 'map_embed_url') {
+            $value = trim((string)($_POST[$key] ?? ''));
         } else {
             $value = cleanString($_POST[$key] ?? '');
         }
@@ -75,7 +77,7 @@ require_once __DIR__ . '/../templates/admin-header.php';
                                            id="<?= h($field['key']) ?>"
                                            <?= $field['value'] === '1' ? 'checked' : '' ?>>
                                 </div>
-                            <?php elseif ($field['type'] === 'textarea'): ?>
+                            <?php elseif ($field['type'] === 'textarea' || $field['key'] === 'map_embed_url'): ?>
                                 <textarea name="<?= h($field['key']) ?>" rows="3"
                                           class="form-control form-control-sm"><?= h($field['value'] ?? '') ?></textarea>
                             <?php elseif ($field['type'] === 'image'): ?>
@@ -92,6 +94,11 @@ require_once __DIR__ . '/../templates/admin-header.php';
                                        name="<?= h($field['key']) ?>"
                                        class="form-control form-control-sm"
                                        value="<?= h($field['value'] ?? '') ?>">
+                            <?php endif; ?>
+                            <?php if ($field['key'] === 'map_embed_url'): ?>
+                                <div class="form-text text-muted">
+                                    Enter a Google Maps embed URL here. If you paste a share link instead, the contact page will fall back to the contact address map.
+                                </div>
                             <?php endif; ?>
                         </div>
                     <?php endforeach; ?>

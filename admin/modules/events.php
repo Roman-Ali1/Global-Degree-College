@@ -22,6 +22,8 @@ if (isPost() && isset($_POST['save_event'])) {
     $desc   = post('description');
     $date   = cleanDate($_POST['event_date'] ?? '');
     $time   = cleanString($_POST['event_time'] ?? '');
+    // Store NULL for empty time values so the DB TIME column isn't given an empty string
+    $time   = $time !== '' ? $time : null;
     $end    = cleanDate($_POST['end_date'] ?? '') ?: null;
     $venue  = post('venue');
     $type   = cleanString($_POST['type'] ?? 'academic');
@@ -125,7 +127,7 @@ require_once __DIR__ . '/../templates/admin-header.php';
                         <div class="col-6">
                             <label class="form-label">Type</label>
                             <select name="type" class="form-select form-select-sm">
-                                <?php foreach (['academic','sports','cultural','seminar','exam','other'] as $t): ?>
+                                                        <?php foreach (['academic','sports','cultural','exam'] as $t): ?>
                                 <option value="<?= $t ?>"
                                     <?= ($editEvent['type'] ?? 'academic') === $t ? 'selected' : '' ?>>
                                     <?= ucfirst($t) ?>

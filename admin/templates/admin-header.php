@@ -74,8 +74,6 @@ function adminNavItem(string $href, string $icon, string $label, string $page, s
             <?php adminNavItem(ADMIN_URL.'/modules/testimonials.php','fa-star',      'Testimonials','testimonials',$currentPage) ?>
 
             <li class="nav-group-label">Other</li>
-            <?php adminNavItem(ADMIN_URL.'/modules/scholarships.php','fa-award',     'Scholarships','scholarships',$currentPage) ?>
-            <?php adminNavItem(ADMIN_URL.'/modules/hostel.php',   'fa-building',     'Hostel',   'hostel',   $currentPage) ?>
             <?php adminNavItem(ADMIN_URL.'/modules/messages.php', 'fa-envelope',     'Messages', 'messages', $currentPage, $unreadMessages) ?>
 
             <li class="nav-group-label">System</li>

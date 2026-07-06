@@ -66,8 +66,6 @@
                         <li><a href="<?= BASE_URL ?>/about.php">About Us</a></li>
                         <li><a href="<?= BASE_URL ?>/courses.php">Programs</a></li>
                         <li><a href="<?= BASE_URL ?>/admissions.php">Admissions</a></li>
-                        <li><a href="<?= BASE_URL ?>/scholarships.php">Scholarships</a></li>
-                        <li><a href="<?= BASE_URL ?>/hostel.php">Hostel</a></li>
                         <li><a href="<?= BASE_URL ?>/gallery.php">Gallery</a></li>
                         <li><a href="<?= BASE_URL ?>/news.php">News</a></li>
                         <li><a href="<?= BASE_URL ?>/contact.php">Contact</a></li>

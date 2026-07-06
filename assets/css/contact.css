@@ -1,0 +1,200 @@
+/*
+ * Global Degree College – Contact Page Styles
+ * Save to: assets/css/contact.css
+ */
+
+/* ── Info strip ──────────────────────────────────────────────── */
+.contact-strip {
+    background: var(--fvc-navy);
+    padding: 40px 0;
+}
+
+.contact-strip-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    color: rgba(255,255,255,0.85);
+}
+
+.contact-strip-icon {
+    width: 46px;
+    height: 46px;
+    background: rgba(201,168,76,0.15);
+    border: 1px solid rgba(201,168,76,0.3);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--fvc-gold-light);
+    font-size: 1.1rem;
+    flex-shrink: 0;
+}
+
+.contact-strip-item h6 {
+    color: var(--fvc-gold-light);
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 4px;
+}
+
+.contact-strip-item p {
+    font-size: 0.875rem;
+    margin: 0;
+    line-height: 1.5;
+    color: rgba(255,255,255,0.75);
+}
+
+.contact-strip-item a {
+    color: rgba(255,255,255,0.75);
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+.contact-strip-item a:hover { color: var(--fvc-gold-light); }
+
+/* ── Map ─────────────────────────────────────────────────────── */
+.contact-map-wrap {
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+    border: 1px solid var(--border-color);
+}
+
+.contact-map-placeholder {
+    height: 240px;
+    background: linear-gradient(135deg, var(--fvc-navy), var(--fvc-navy-dark));
+    border-radius: var(--radius-md);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    color: rgba(255,255,255,0.7);
+}
+
+.contact-map-placeholder i {
+    font-size: 2.5rem;
+    color: var(--fvc-gold);
+}
+
+.contact-map-placeholder p {
+    font-size: 0.9rem;
+    margin: 0;
+}
+
+/* ── WhatsApp button ─────────────────────────────────────────── */
+.contact-whatsapp-btn {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    background: #25d366;
+    color: #fff;
+    border-radius: var(--radius-md);
+    padding: 16px 20px;
+    text-decoration: none;
+    transition: var(--transition);
+    box-shadow: 0 4px 15px rgba(37,211,102,0.3);
+}
+
+.contact-whatsapp-btn:hover {
+    background: #20ba58;
+    color: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(37,211,102,0.4);
+}
+
+.contact-whatsapp-btn .fab {
+    font-size: 1.8rem;
+    flex-shrink: 0;
+}
+
+.contact-whatsapp-btn strong {
+    display: block;
+    font-size: 0.9rem;
+}
+
+.contact-whatsapp-btn span {
+    font-size: 0.75rem;
+    opacity: 0.85;
+}
+
+/* ── Social block ────────────────────────────────────────────── */
+.contact-social-block h6 {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.contact-social-links {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.csocial-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    border-radius: var(--radius-sm);
+    color: #fff;
+    font-size: 0.82rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+.csocial-btn:hover {
+    opacity: 0.88;
+    color: #fff;
+    transform: translateY(-2px);
+}
+
+.csocial-fb { background: #1877f2; }
+.csocial-ig { background: linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888); }
+.csocial-yt { background: #ff0000; }
+
+/* ── Success state ───────────────────────────────────────────── */
+.contact-success {
+    text-align: center;
+    padding: 60px 30px;
+    background: var(--fvc-white);
+    border-radius: var(--radius-lg);
+    border: 1.5px solid var(--border-color);
+    box-shadow: var(--shadow-sm);
+}
+
+.contact-success-icon {
+    width: 80px;
+    height: 80px;
+    background: rgba(56,161,105,0.1);
+    border: 2px solid rgba(56,161,105,0.3);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+}
+
+.contact-success-icon i {
+    font-size: 2.4rem;
+    color: #38a169;
+}
+
+/* ── Contact form focus ──────────────────────────────────────── */
+.contact-form .form-control:focus,
+.contact-form .form-select:focus {
+    border-color: var(--fvc-navy);
+    box-shadow: 0 0 0 3px rgba(26,60,110,0.1);
+}
+
+/* ── Responsive ──────────────────────────────────────────────── */
+@media (max-width: 767px) {
+    .contact-strip { padding: 28px 0; }
+    .contact-strip-item { flex-direction: column; gap: 10px; }
+    .contact-strip-icon { width: 38px; height: 38px; font-size: 0.95rem; }
+    .contact-social-links { gap: 8px; }
+    .csocial-btn span { display: none; }
+}

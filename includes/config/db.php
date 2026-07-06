@@ -9,8 +9,24 @@
 declare(strict_types=1);
 
 // ── Database credentials ──────────────────────────────────────
-define('DB_HOST',    'localhost');
-define('DB_CHARSET', 'utf8mb4');
+// Use host-aware credentials so local and Hostinger environments both work.
+if (!defined('DB_HOST')) {
+    $host = $_SERVER['HTTP_HOST'] ?? 'localhost';
+
+    if (str_contains($host, 'hostingersite.com')) {
+        define('DB_HOST',    'localhost');
+        define('DB_NAME',    'u557021395_db_f7xkV3lg'); // cPanel format
+        define('DB_USER',    'u557021395_usr_f7xkV3lg');
+        define('DB_PASS',    '&5#3NRXl');
+    } else {
+        define('DB_HOST',    'localhost');
+        define('DB_NAME',    'fvc_db');
+        define('DB_USER',    'root');
+        define('DB_PASS',    '');
+    }
+}
+
+if (!defined('DB_CHARSET')) define('DB_CHARSET', 'utf8mb4');
 
 /**
  * Database – PDO Singleton Wrapper

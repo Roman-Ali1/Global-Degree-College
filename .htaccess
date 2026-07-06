@@ -1,26 +1,33 @@
-# Future Vision College – Apache Configuration
-# Save to: .htaccess (project root)
+# ================================================================
+# Global Degree College – Apache Security Configuration
+# ================================================================
 
 Options -Indexes
 Options -MultiViews
+ServerSignature Off
 
-# ── URL Rewriting ─────────────────────────────────────────────
+# ── Rewrite Engine ───────────────────────────────────────────────
 RewriteEngine On
-RewriteBase /Global-Degree-College/
-# Redirect to HTTPS in production (uncomment when SSL is active)
+
+# Force HTTPS in production (uncomment when SSL active)
 # RewriteCond %{HTTPS} off
+# RewriteCond %{REQUEST_URI} !^/\.well-known/
 # RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
-# Remove trailing slash (except root)
+# Remove trailing slash (skip directories)
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^(.*)/$ /$1 [L,R=301]
+RewriteCond %{REQUEST_URI} /+$
+RewriteRule ^ %{REQUEST_URI}/ [L,R=301]
 
-# ── Block direct access to sensitive directories ──────────────
-RewriteRule ^includes/       - [F,L]
-RewriteRule ^sql/            - [F,L]
-RewriteRule ^uploads/admissions/ - [F,L]
+# ── Block direct access to sensitive directories ─────────────────
+RewriteRule ^includes/           - [F,L]
+RewriteRule ^sql/                - [F,L]
+RewriteRule ^tmp/                - [F,L]
 
-# ── Security Headers ──────────────────────────────────────────
+# Block direct access to uploaded PHP files (critical)
+RewriteRule ^uploads/.*\.(php|php\d|phtml|phar|shtml|cgi)$ - [F,L]
+
+# ── Security Headers ─────────────────────────────────────────────
 <IfModule mod_headers.c>
     Header always set X-Frame-Options          "SAMEORIGIN"
     Header always set X-Content-Type-Options   "nosniff"
@@ -28,55 +35,70 @@ RewriteRule ^uploads/admissions/ - [F,L]
     Header always set Referrer-Policy          "strict-origin-when-cross-origin"
     Header always set Permissions-Policy       "geolocation=(), microphone=(), camera=()"
 
-    # Remove server signature
+    # Remove fingerprinting headers
     Header unset X-Powered-By
     Header always unset X-Powered-By
+    Header unset Server
+
+    # Cache control for sensitive pages
+    <FilesMatch "\.(php)$">
+        Header set Cache-Control "no-store, no-cache, must-revalidate"
+        Header set Pragma "no-cache"
+    </FilesMatch>
 </IfModule>
 
-# ── Disable server signature ──────────────────────────────────
-ServerSignature Off
-
-# ── Protect sensitive files ───────────────────────────────────
-<FilesMatch "(\.env|\.git|composer\.json|composer\.lock|package\.json)$">
+# ── Protect sensitive files ───────────────────────────────────────
+<FilesMatch "(\.env|\.git|composer\.json|composer\.lock|package\.json|README\.md|make_hash\.php)$">
     Require all denied
 </FilesMatch>
 
-# Protect .htaccess itself
+# Protect .htaccess
 <Files ".htaccess">
     Require all denied
 </Files>
 
-# ── PHP settings ──────────────────────────────────────────────
-<IfModule mod_php.c>
-    php_flag display_errors    Off
-    php_value upload_max_filesize 10M
-    php_value post_max_size       12M
-    php_value max_execution_time  60
-    php_value session.cookie_httponly 1
-    php_flag session.use_strict_mode  On
-</IfModule>
+# Protect DB config directly
+<Files "db.php">
+    Require all denied
+</Files>
 
-# ── Cache static assets ───────────────────────────────────────
-<IfModule mod_expires.c>
-    ExpiresActive On
-    ExpiresByType image/jpg     "access plus 1 month"
-    ExpiresByType image/jpeg    "access plus 1 month"
-    ExpiresByType image/png     "access plus 1 month"
-    ExpiresByType image/webp    "access plus 1 month"
-    ExpiresByType text/css      "access plus 1 week"
-    ExpiresByType application/javascript "access plus 1 week"
-    ExpiresByType image/x-icon  "access plus 1 year"
-</IfModule>
+# ── Prevent PHP execution in uploads ─────────────────────────────
+# Belt-and-suspenders: also block via rewrite above
+# Uploads folder is protected by rewrite rules above, so no PHP handler override is needed here.
 
-# ── Gzip compression ──────────────────────────────────────────
-<IfModule mod_deflate.c>
-    AddOutputFilterByType DEFLATE text/html text/plain text/css
-    AddOutputFilterByType DEFLATE application/javascript application/json
-</IfModule>
-
-# ── Block bad bots ────────────────────────────────────────────
+# ── Block bad bots + scanners ─────────────────────────────────────
 <IfModule mod_rewrite.c>
-    RewriteCond %{HTTP_USER_AGENT} (libwww-perl|wget|python|nikto|curl|scan|java|winhttp|clshttp|loader) [NC,OR]
+    RewriteCond %{HTTP_USER_AGENT} (libwww-perl|wget|python|nikto|curl|scan|java|winhttp|clshttp|loader|zmeu|masscan|zgrab) [NC,OR]
     RewriteCond %{HTTP_USER_AGENT} (<|>|'|%0A|%0D|%27|%3C|%3E|%00) [NC]
     RewriteRule .* - [F,L]
+</IfModule>
+
+# ── Block common exploit patterns in query strings ────────────────
+<IfModule mod_rewrite.c>
+    RewriteCond %{QUERY_STRING} (\.\./|\.\.\\) [NC,OR]
+    RewriteCond %{QUERY_STRING} (union.*select|select.*from|insert.*into|drop.*table) [NC,OR]
+    RewriteCond %{QUERY_STRING} (<script|javascript:|vbscript:|onload=|onerror=) [NC,OR]
+    RewriteCond %{QUERY_STRING} (base64_encode|eval\(|phpinfo\(\)|system\() [NC]
+    RewriteRule .* - [F,L]
+</IfModule>
+
+# ── Static asset caching ──────────────────────────────────────────
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresByType image/jpg         "access plus 1 month"
+    ExpiresByType image/jpeg        "access plus 1 month"
+    ExpiresByType image/png         "access plus 1 month"
+    ExpiresByType image/webp        "access plus 1 month"
+    ExpiresByType image/svg+xml     "access plus 1 month"
+    ExpiresByType text/css          "access plus 1 week"
+    ExpiresByType application/javascript "access plus 1 week"
+    ExpiresByType image/x-icon      "access plus 1 year"
+    ExpiresByType font/woff2        "access plus 1 year"
+</IfModule>
+
+# ── Gzip compression ──────────────────────────────────────────────
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html text/plain text/css text/javascript
+    AddOutputFilterByType DEFLATE application/javascript application/json
+    AddOutputFilterByType DEFLATE image/svg+xml font/woff2
 </IfModule>

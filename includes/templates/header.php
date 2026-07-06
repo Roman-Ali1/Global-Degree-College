@@ -139,16 +139,6 @@ $admissionOpen = setting('admission_open', '1') === '1';
                                 <i class="fas fa-calendar-alt me-2 text-primary"></i>Events
                             </a>
                         </li>
-                        <li>
-                            <a class="dropdown-item" href="<?= BASE_URL ?>/hostel.php">
-                                <i class="fas fa-building me-2 text-primary"></i>Hostel
-                            </a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item" href="<?= BASE_URL ?>/scholarships.php">
-                                <i class="fas fa-award me-2 text-primary"></i>Scholarships
-                            </a>
-                        </li>
                     </ul>
                 </li>
 

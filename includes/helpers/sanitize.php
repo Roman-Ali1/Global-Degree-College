@@ -134,3 +134,24 @@ function validateMobile(string $value): bool
     $cleaned = preg_replace('/[\s\-]/', '', $value);
     return (bool)preg_match('/^(\+92|92|0)3[0-9]{9}$/', $cleaned);
 }
+/**
+ * Validate image file type from $_FILES entry.
+ * Returns true only if MIME type matches allowed list.
+ * Never trust $_FILES['type'] — always use finfo.
+ */
+function validateImageFile(array $file): bool
+{
+    if ($file['error'] !== UPLOAD_ERR_OK) return false;
+    $finfo    = new finfo(FILEINFO_MIME_TYPE);
+    $mimeType = $finfo->file($file['tmp_name']);
+    return in_array($mimeType, ALLOWED_IMAGE_TYPES, true);
+}
+
+/**
+ * Validate that a string is a safe slug.
+ * Prevents path traversal via slug parameters.
+ */
+function validateSlug(string $slug): bool
+{
+    return (bool)preg_match('/^[a-z0-9\-]+$/', $slug);
+}

@@ -2,27 +2,36 @@
 declare(strict_types=1);
 require_once __DIR__ . '/../includes/config/app.php';
 
-// Already logged in — redirect to dashboard
 if (Auth::isLoggedIn()) {
     header('Location: ' . ADMIN_URL . '/index.php');
     exit;
 }
 
-$error    = '';
-$email    = '';
+$error = '';
+$email = '';
 
 if (isPost()) {
     CSRF::requireValid();
+
+    $ip       = getClientIP();
     $email    = cleanEmail($_POST['email'] ?? '');
     $password = $_POST['password'] ?? '';
 
-    if (empty($email) || empty($password)) {
+    // ── Rate limit: 10 attempts per 15 minutes per IP ──────────
+    if (!RateLimit::allow('admin_login', $ip, 10, 900)) {
+        $error = 'Too many login attempts from your IP. Please wait 15 minutes.';
+    } elseif (empty($email) || empty($password)) {
         $error = 'Email and password are required.';
     } else {
         $result = Auth::login($email, $password);
         if ($result['success']) {
-            $redirect = cleanString($_GET['redirect'] ?? '');
-            header('Location: ' . (str_starts_with($redirect, '/') ? $redirect : ADMIN_URL . '/index.php'));
+            // Clean up old rate limit hits on success
+            RateLimit::cleanup();
+            $redirect = Security::safeRedirectUrl(
+                cleanString($_GET['redirect'] ?? ''),
+                ADMIN_URL . '/index.php'
+            );
+            header('Location: ' . $redirect);
             exit;
         }
         $error = $result['message'];
@@ -61,29 +70,27 @@ if (isPost()) {
 
         <form method="POST" action="">
             <?= CSRF::field() ?>
-
             <div class="mb-3">
                 <label class="form-label">Email Address</label>
                 <div class="input-icon-wrap">
                     <i class="fas fa-envelope"></i>
                     <input type="email" name="email" class="form-control ps-5"
                            value="<?= h($email) ?>" placeholder="admin@college.edu.pk"
-                           required autofocus>
+                           required autofocus autocomplete="email">
                 </div>
             </div>
-
             <div class="mb-4">
                 <label class="form-label">Password</label>
                 <div class="input-icon-wrap">
                     <i class="fas fa-lock"></i>
                     <input type="password" name="password" id="passwordField"
-                           class="form-control ps-5" placeholder="••••••••" required>
+                           class="form-control ps-5" placeholder="••••••••"
+                           required autocomplete="current-password">
                     <button type="button" class="toggle-password" onclick="togglePassword()">
                         <i class="fas fa-eye" id="toggleIcon"></i>
                     </button>
                 </div>
             </div>
-
             <button type="submit" class="btn btn-admin-primary w-100">
                 <i class="fas fa-sign-in-alt me-2"></i>Sign In
             </button>
