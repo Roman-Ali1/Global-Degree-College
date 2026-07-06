@@ -80,7 +80,7 @@ $admissionOpen = setting('admission_open', '1') === '1';
         <a class="navbar-brand d-flex align-items-center gap-2" href="<?= BASE_URL ?>/">
             <img src="<?= BASE_URL ?>/<?= h($siteLogo) ?>"
                  alt="<?= h($siteName) ?> Logo"
-                 height="48" width="48"
+                 height="52" width="52"
                  class="navbar-logo"
                  onerror="this.onerror=null; this.src='<?= BASE_URL ?>/assets/images/defaults/placeholder.png'">
             <div class="brand-text">

@@ -100,6 +100,11 @@ if (!isset($GLOBALS['site_settings'])) {
 if (!function_exists('setting')) {
     function setting(string $key, string $default = ''): string
     {
-        return (string)($GLOBALS['site_settings'][$key] ?? $default);
+        $value = $GLOBALS['site_settings'][$key] ?? null;
+        if ($value === null || $value === '') {
+            return $default;
+        }
+
+        return (string) $value;
     }
 }
